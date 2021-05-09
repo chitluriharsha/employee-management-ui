@@ -1,0 +1,43 @@
+<mat-card>
+  <mat-card-header>
+    <div mat-card-avatar></div>
+    <mat-card-title>Insurance Details</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <form [formGroup]="insuranceForm">
+      <mat-form-field>
+        <mat-label>Employee Id</mat-label>
+        <input matInput formControlName="employeeId" type="text">
+        <mat-error *ngIf="!insuranceForm.get('employeeId').valid && insuranceForm.get('employeeId').touched">
+          Please enter a valid employee Id</mat-error>
+      </mat-form-field>
+      <button mat-raised-button color="primary" [disabled]="!insuranceForm.get('employeeId').valid"
+        (click)="openDialog()">Add dependent details</button>
+    </form>
+    <br>
+    <mat-card-title>Dependent Details</mat-card-title>
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef> Name </th>
+        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="dateOfBirth">
+        <th mat-header-cell *matHeaderCellDef> Date of Birth </th>
+        <td mat-cell *matCellDef="let element"> {{element.dateOfBirth}} </td>
+      </ng-container>
+      <ng-container matColumnDef="relation">
+        <th mat-header-cell *matHeaderCellDef> Relation </th>
+        <td mat-cell *matCellDef="let element"> {{element.relation}} </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <br>
+    <mat-card-actions>
+      <button mat-raised-button color="primary" [disabled]="dependentDetails.length==0" (click)="saveDetails()">save
+        details</button>
+      <button mat-raised-button color="warn" (click)="resetDetails()">Reset</button>
+    </mat-card-actions>
+  </mat-card-content>
+</mat-card>

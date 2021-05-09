@@ -1,0 +1,93 @@
+<mat-card>
+  <mat-card-header>
+    <div mat-card-avatar></div>
+    <mat-card-title>Employee Details</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <form [formGroup]="addEmployeeForm">
+      <p>
+        <mat-form-field>
+          <mat-label>Employee Id</mat-label>
+          <input matInput formControlName="employeeId" type="text">
+          <mat-error *ngIf="!addEmployeeForm.get('employeeId').valid && addEmployeeForm.get('employeeId').touched">
+            Employee Id is required.</mat-error>
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field>
+          <mat-label>Employee Name</mat-label>
+          <input matInput formControlName="employeeName" type="text">
+          <mat-error *ngIf="!addEmployeeForm.get('employeeName').valid && addEmployeeForm.get('employeeName').touched">
+            Employee Name is required.</mat-error>
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field>
+          <mat-label>Date of Birth</mat-label>
+          <input matInput [matDatepicker]="dateOfBirth" formControlName="dateOfBirth">
+          <mat-datepicker-toggle matSuffix [for]="dateOfBirth">
+            <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+          </mat-datepicker-toggle>
+          <mat-datepicker #dateOfBirth></mat-datepicker>
+          <mat-error *ngIf="!addEmployeeForm.get('dateOfBirth').valid && addEmployeeForm.get('dateOfBirth').touched">
+            Date of birth is required.</mat-error>
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field>
+          <mat-label>Designation</mat-label>
+          <input matInput formControlName="designation" type="text">
+          <mat-error *ngIf="!addEmployeeForm.get('designation').valid && addEmployeeForm.get('designation').touched">
+            Designation is required.</mat-error>
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field>
+          <mat-label>Date of Joining</mat-label>
+          <input matInput [matDatepicker]="dateOfJoining" formControlName="dateOfJoining">
+          <mat-datepicker-toggle matSuffix [for]="dateOfJoining">
+            <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+          </mat-datepicker-toggle>
+          <mat-datepicker #dateOfJoining></mat-datepicker>
+          <mat-error
+            *ngIf="!addEmployeeForm.get('dateOfJoining').valid && addEmployeeForm.get('dateOfJoining').touched">Please
+            Date of joining is required.</mat-error>
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field>
+          <mat-label>Work location</mat-label>
+          <input matInput formControlName="workLocation" type="text">
+          <mat-error *ngIf="!addEmployeeForm.get('workLocation').valid && addEmployeeForm.get('workLocation').touched">
+            Work location is required.</mat-error>
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field>
+          <mat-label>Mobile number</mat-label>
+          <input matInput formControlName="contactNo" type="text">
+          <mat-error
+            *ngIf="addEmployeeForm.get('contactNo').hasError('required') && addEmployeeForm.get('contactNo').touched">
+            Mobile Number is required.</mat-error>
+          <mat-error *ngIf="addEmployeeForm.get('contactNo').hasError('pattern')">
+            Please enter 10 digit valid Mobile Number.</mat-error>
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field>
+          <mat-label>Email</mat-label>
+          <input matInput formControlName="emailId" type="text">
+          <mat-error *ngIf="!addEmployeeForm.get('emailId').valid && addEmployeeForm.get('emailId').touched">
+            Please enter a valid email</mat-error>
+        </mat-form-field>
+      </p>
+
+      <mat-card-actions>
+        <button mat-raised-button color="primary" (click)="onAddEmployee()" [disabled]='!addEmployeeForm.valid'>Add
+          Employee</button>
+        <button mat-raised-button color="warn" (click)="resetDetails()">Reset</button>
+      </mat-card-actions>
+
+    </form>
+  </mat-card-content>
+</mat-card>
